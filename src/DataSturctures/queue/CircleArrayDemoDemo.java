@@ -3,6 +3,7 @@ package DataSturctures.queue;
 import java.util.Scanner;
 
 /**
+ * 数组模拟环形队列
  * 会牺牲一个存储单元
  */
 public class CircleArrayDemoDemo {

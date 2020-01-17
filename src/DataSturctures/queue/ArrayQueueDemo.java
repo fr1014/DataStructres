@@ -1,5 +1,8 @@
 package DataSturctures.queue;
 
+/**
+ * 数组模拟队列
+ */
 public class ArrayQueueDemo {
 
     public static void main(String[] args) {

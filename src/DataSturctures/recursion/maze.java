@@ -4,7 +4,7 @@ package DataSturctures.recursion;
 public class maze {
 
     public static void main(String[] args) {
-        /**
+        /*
          * 迷宫地图
          * 1 1 1 1 1 1 1
          * 1 0 0 0 0 0 1

@@ -10,7 +10,11 @@ public class Queue8 {
     private int max = 8;
     //表示一共有多少种解法
     private static int count = 0;
-    //表示一种解法，eg:array = {0,4,7,5,2,6,1,3};array[0] = 0 表示第一个皇后放置在第一列
+    /*
+     *表示一种解法，eg:array = {0,4,7,5,2,6,1,3};array[0] = 0 表示第一个皇后放置在第一列
+     *下标：第几个皇后
+     * value: 
+     */
     private int[] array = new int[max];
 
     public static void main(String[] args) {

@@ -30,7 +30,9 @@ public class InsertSort {
                 insertIndex--;
             }
 
-            arr[insertIndex + 1] = insertVal;
+            if (insertIndex + 1 != i) {
+                arr[insertIndex + 1] = insertVal;
+            }
         }
 
 //        int insertVal = arr[1];

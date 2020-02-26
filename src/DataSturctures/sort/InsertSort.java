@@ -45,4 +45,18 @@ public class InsertSort {
 //
 //        arr[insertIndex + 1] = insertVal;
     }
+
+    public static void insertSort2(int[] arr) {
+
+        for (int i = 1; i < arr.length; i++) {
+            int insertIndex = i;
+            int insertValue = arr[insertIndex];
+            while (insertIndex > 0 && insertValue < arr[insertIndex - 1]) {
+                arr[insertIndex] = arr[insertIndex - 1];
+                insertIndex--;
+            }
+
+            arr[insertIndex] = insertValue;
+        }
+    }
 }

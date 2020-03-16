@@ -12,6 +12,7 @@ public class HashTabDemo {
         while (true) {
             System.out.println("add: 添加雇员");
             System.out.println("list: 显示雇员");
+            System.out.println("delete: 删除雇员");
             System.out.println("exit: 退出");
             key = sc.next();
             switch (key) {
@@ -22,6 +23,11 @@ public class HashTabDemo {
                     String name = sc.next();
                     Emp emp = new Emp(id, name);
                     hashTap.add(emp);
+                    break;
+                case "delete":
+                    System.out.println("请输入要删除的员工的id");
+                    int idNo = sc.nextInt();
+                    hashTap.delete(idNo);
                     break;
                 case "list":
                     System.out.println("所有雇员的信息");
@@ -56,6 +62,12 @@ class HashTap {
     public void add(Emp emp) {
         int empLinkedListNo = hashFun(emp.getId());
         empLinkedLists[empLinkedListNo].add(emp);
+    }
+
+    //删除员工
+    public void delete(int id) {
+        int empLinkedListNo = hashFun(id);
+        empLinkedLists[empLinkedListNo].delete(id);
     }
 
     //遍历所有的链表，遍历hashtable
@@ -122,6 +134,37 @@ class EmpLinkedList {
             curEmp = curEmp.getNext();
         }
         curEmp.setNext(emp);
+    }
+
+    //根据传入的雇员id删除此雇员
+    public void delete(int id) {
+        Emp curEmp = head;
+        boolean flag = false;  //是否找到要删除的节点
+        boolean delHead = false; //是否删除头节点
+        while (true) {
+            //删除头节点
+            if (head.getId() == id) {
+                head = head.getNext();
+                delHead = true;
+                break;
+            }
+            //已经到了链表的最后
+            if (curEmp.getNext() == null) {
+                break;
+            }
+            //找到待删除节点的前一个节点
+            if (curEmp.getNext().getId() == id) {
+                flag = true;
+                break;
+            }
+            curEmp = curEmp.getNext(); //curEmp后移，遍历链表
+        }
+
+        if (flag) {
+            curEmp.setNext(curEmp.getNext().getNext());
+        } else if (!delHead){
+            System.out.println("未找到要删除的员工!");
+        }
     }
 
     //遍历链表

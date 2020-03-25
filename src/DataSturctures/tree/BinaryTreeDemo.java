@@ -31,6 +31,10 @@ public class BinaryTreeDemo {
         binaryTree.postOrder(); //2,5,4,3,1
         System.out.println("后序遍历查找：");
         System.out.println(binaryTree.postOrderFind(5));
+
+        System.out.println("===========");
+        binaryTree.delNode(5);   //删除id为5的结点
+        binaryTree.preOrder();
     }
 }
 
@@ -95,8 +99,8 @@ class BinaryTree {
      * @param id 需要查找的id
      * @return
      */
-    public HeroNode infixOrderFind(int id){
-        if (this.root!=null){
+    public HeroNode infixOrderFind(int id) {
+        if (this.root != null) {
             return this.root.infixOrderFind(id);
         }
         return null;
@@ -108,11 +112,32 @@ class BinaryTree {
      * @param id 需要查找的id
      * @return
      */
-    public HeroNode postOrderFind(int id){
-        if (this.root!=null){
+    public HeroNode postOrderFind(int id) {
+        if (this.root != null) {
             return this.root.postOrderFind(id);
         }
         return null;
+    }
+
+    /**
+     * 根据id删除结点
+     *
+     * @param id
+     */
+    public void delNode(int id) {
+
+        if (this.root != null) {
+            //判断根节点是否为要删除的结点
+            if (this.root.getId() == id) {
+                this.root = null;
+                return;
+            }
+            //root不是的话，递归删除
+            this.root.delNode(id);
+        } else {
+            System.out.println("此二叉树为空，无法删除结点！");
+        }
+
     }
 }
 
@@ -157,6 +182,40 @@ class HeroNode {
 
     public void setRight(HeroNode right) {
         this.right = right;
+    }
+
+    /**
+     * 递归删除结点
+     * 1.如果删除的结点是叶子结点，则删除该结点
+     * 2.如果删除的结点是非叶子结点，则删除该子树
+     *
+     * @param id 要删除结点的id
+     */
+    public void delNode(int id) {
+        /*
+         * 1.由于该二叉树是单向的，所以我们要判断的是 当前结点的子结点 是否为须删除的结点
+         * 2.如果当前结点的左子结点不为空，并且左子结点就是你要删除的结点就将this.left = null,并且返回（结束递归删除）
+         * 3.如果当前结点的右子结点不为空，并且右子结点就是你要删除的结点就将this.right = null,并且返回（结束递归删除）
+         * 4.如果第2、3步没有删除结点，那么就需要向左子树递归删除
+         * 5.如果第4步也没有删除结点，就需要向右子树递归删除
+         */
+        if (this.left != null && this.left.id == id) {
+            this.left = null;
+            return;
+        }
+
+        if (this.right != null && this.right.id == id) {
+            this.right = null;
+            return;
+        }
+
+        if (this.left != null) {
+            this.left.delNode(id);
+        }
+
+        if (this.right != null) {
+            this.right.delNode(id);
+        }
     }
 
     //前序遍历
@@ -253,6 +312,7 @@ class HeroNode {
 
     /**
      * 后序遍历查找
+     *
      * @param id
      * @return
      */

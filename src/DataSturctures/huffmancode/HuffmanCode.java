@@ -36,12 +36,12 @@ public class HuffmanCode {
         Map<Byte, Integer> counts = new HashMap<>();
 
         for (Byte b : bytes) {
-            Integer count = counts.get(b);
-            if (count == null) {  //map中没有该字符数据
-                counts.put(b, 1);
-            } else {
-                counts.put(b, count + 1);
-            }
+//            if (count == null) {  //map中没有该字符数据
+//                counts.put(b, 1);
+//            } else {
+//                counts.put(b, count + 1);
+//            }
+            counts.merge(b, 1, Integer::sum);
         }
 
         //把每一个键值转成一个Node对象，并加入到nodes集合

@@ -7,22 +7,44 @@ public class HuffmanCode {
     public static void main(String[] args) {
         String content = "i like like like java do you like a java";
         byte[] contentBytes = content.getBytes();
-        System.out.println("contentBytes.length: " + contentBytes.length);
+        System.out.println("压缩前长度: " + contentBytes.length);
+//
+//        List<Node> nodes = getNodes(contentBytes);
+//        System.out.println("nodes: " + nodes);
+//
+//        Node root = createHuffmanTree(nodes);
+//        preOrder(root);
+//
+////        getCodes(root, "", stringBuilder);
+//        getCodes(root);
+//        System.out.println("生成的哈夫曼编码表：" + huffmanCodes);
+//        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
+//        System.out.println("huffmanCodeBytes = " + Arrays.toString(huffmanCodeBytes));
+        byte[] huffmanCodeBytes = huffmanZip(contentBytes);
+        System.out.println(Arrays.toString(huffmanCodeBytes));
+        System.out.println("压缩后长度：" + huffmanCodeBytes.length);
+    }
 
-        List<Node> nodes = getNodes(contentBytes);
-        System.out.println("nodes: " + nodes);
-
+    /**
+     * 使用一个方法，将前面的方法封装起来，便于调用
+     *
+     * @param bytes 原始的字符串对应的字节数组
+     * @return 经过哈夫曼编码处理后的字节数组（压缩后的数组）
+     */
+    private static byte[] huffmanZip(byte[] bytes) {
+        List<Node> nodes = getNodes(bytes);
+        //根据nodes创建huffmanTree
         Node root = createHuffmanTree(nodes);
-        preOrder(root);
+        //对应的哈夫曼编码（根据哈夫曼树）
+        Map<Byte, String> huffmanCodes = getCodes(root);
+        //根据生成的哈夫曼编码，得到压缩后的哈夫曼编码字节数组
+        byte[] huffmanCodeBytes = zip(bytes, huffmanCodes);
 
-//        getCodes(root, "", stringBuilder);
-        getCodes(root);
-        System.out.println("生成的哈夫曼编码表：" + huffmanCodes);
-        byte[] huffmanCodeBytes = zip(contentBytes, huffmanCodes);
-        System.out.println("huffmanCodeBytes = " + Arrays.toString(huffmanCodeBytes));
+        return huffmanCodeBytes;
     }
 
     //编写一个方法，将字符串对应的byte[] 数组，通过生成的赫夫曼编码表，返回一个赫夫曼编码压缩后的byte[]
+
     /**
      * @param bytes        这时原始的字符串对应的 byte[]
      * @param huffmanCodes 生成的赫夫曼编码map

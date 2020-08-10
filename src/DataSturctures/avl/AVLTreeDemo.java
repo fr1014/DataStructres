@@ -6,7 +6,8 @@ package DataSturctures.avl;
 public class AVLTreeDemo {
 
     public static void main(String[] args) {
-        int[] arr = {4, 3, 6, 5, 7, 8};
+//        int[] arr = {4, 3, 6, 5, 7, 8};
+        int[] arr = {10,8,12,7,9,6};
         AVLTree avlTree = new AVLTree();
 
         for (int value : arr) {
@@ -18,6 +19,7 @@ public class AVLTreeDemo {
         System.out.println("树的高度: " + avlTree.getRoot().height());
         System.out.println("树的左子树高度: " + avlTree.getRoot().leftHeight());
         System.out.println("树的右子树的高度: " + avlTree.getRoot().rightHeight());
+        System.out.println("平衡后的Root节点: "+ avlTree.getRoot());
     }
 
 
@@ -113,6 +115,10 @@ class Node {
         if (rightHeight() - leftHeight() > 1) {
             leftRotate();
         }
+
+        if (leftHeight() - rightHeight() > 1){
+            rightRotate();
+        }
     }
 
     //中序遍历
@@ -161,5 +167,15 @@ class Node {
         right = right.right;
         //把当前的左子树设置成新的节点
         left = newNode;
+    }
+
+    //右旋转
+    public void rightRotate(){
+        Node newNode = new Node(value);
+        newNode.left = left.right;
+        newNode.right = right;
+        value = left.value;
+        left = left.left;
+        right = newNode;
     }
 }

@@ -54,4 +54,15 @@ class ListNode {
                 "val=" + val +
                 '}';
     }
+
+    public void sys(){
+        if (next!=null){
+            System.out.print(val + "——>");
+        }else {
+            System.out.print(val);
+        }
+       if (next != null){
+           next.sys();
+       }
+    }
 }

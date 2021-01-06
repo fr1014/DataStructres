@@ -1,5 +1,6 @@
 package kt.面向对象.单例.懒汉式
 
+//懒汉式
 class SingletonDemo private constructor(){
 
     companion object{
@@ -12,7 +13,6 @@ class SingletonDemo private constructor(){
         }
     }
 
-    @Synchronized
     fun get():SingletonDemo{
         return instance!!
     }
